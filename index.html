@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #4CAF50;
+      padding: 20px;
+      color: white;
+      font-size: 24px;
+    }
+    section {
+      margin: 40px;
+    }
+    .product {
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .price {
+      font-size: 24px;
+      color: #333;
+    }
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Buy Digital Products
+</header>
+
+<section>
+  <div class="product">
+    <h2>Product 1</h2>
+    <p>A great digital product that helps you improve your workflow.</p>
+    <div class="price" id="product1-price">$10</div>
+    <button class="button" onclick="buyNow('Product 1')">Buy Now (PayPal)</button>
+  </div>
+
+  <div class="product">
+    <h2>Product 2</h2>
+    <p>Another awesome product to enhance your productivity.</p>
+    <div class="price" id="product2-price">$20</div>
+    <button class="button" onclick="buyNow('Product 2')">Buy Now (Google Pay)</button>
+  </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Fetch user's location based on IP
+  $.get("https://ipapi.co/json/", function(data) {
+    let country = data.country;
+    let currencySymbol = '$'; // Default currency symbol
+
+    // Set different prices based on country
+    if (country === "IN") {
+      document.getElementById('product1-price').innerText = '₹800';
+      document.getElementById('product2-price').innerText = '₹1600';
+      currencySymbol = '₹';
+    } else if (country === "UK") {
+      document.getElementById('product1-price').innerText = '£8';
+      document.getElementById('product2-price').innerText = '£16';
+      currencySymbol = '£';
+    } else if (country === "EU") {
+      document.getElementById('product1-price').innerText = '€9';
+      document.getElementById('product2-price').innerText = '€18';
+      currencySymbol = '€';
+    }
+
+    console.log(`Prices adjusted for country: ${country}`);
+  });
+
+  // Buy now function (for PayPal or Google Pay integration)
+  function buyNow(product) {
+    alert("Proceeding to buy " + product);
+    // Here you will handle the actual PayPal or Google Pay integration
+  }
+</script>
+
+</body>
+</html>
